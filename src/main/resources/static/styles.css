@@ -1,0 +1,11 @@
+main {
+  margin: 10px;
+  padding: 5px;
+  background: ivory;
+  border: 1px solid black;
+  border-radius: 5px;
+}
+
+ul {
+  font-family: sans-serif;
+}
