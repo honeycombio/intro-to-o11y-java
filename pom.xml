@@ -47,11 +47,11 @@
                         <!--                        <HONEYCOMB_API_KEY>define this in your runtime env vars</HONEYCOMB_API_KEY>-->
                         <HONEYCOMB_DATASET>otel-java</HONEYCOMB_DATASET>
                     </environmentVariables>
-                    <agents>
-                        <agent>
-                            honeycomb-opentelemetry-javaagent-0.4.0-all.jar
-                        </agent>
-                    </agents>
+<!--                    <agents>-->
+<!--                        <agent>-->
+<!--                            honeycomb-opentelemetry-javaagent-0.4.0-all.jar-->
+<!--                        </agent>-->
+<!--                    </agents>-->
                 </configuration>
             </plugin>
         </plugins>
