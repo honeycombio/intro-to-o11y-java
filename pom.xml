@@ -14,7 +14,7 @@
     <name>fibonacci</name>
     <description>Demo microservice for observability</description>
     <properties>
-        <java.version>11</java.version>
+        <java.version>8</java.version>
     </properties>
     <dependencies>
 
@@ -35,11 +35,19 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
-<!--                <configuration>-->
-<!--                    <agent>-->
-<!--                        PATH to JAR=port=XXXX-->
-<!--                    </agent>-->
-<!--                </configuration>-->
+                <configuration>
+                    <environmentVariables>
+                        <SAMPLE_RATE>1</SAMPLE_RATE>
+                        <SERVICE_NAME>fibonacci</SERVICE_NAME>
+<!--                        <HONEYCOMB_API_KEY>define this in your runtime env vars</HONEYCOMB_API_KEY>-->
+                        <HONEYCOMB_DATASET>otel-java</HONEYCOMB_DATASET>
+                    </environmentVariables>
+                    <agents>
+                        <agent>
+                            honeycomb-opentelemetry-javaagent-0.4.0-all.jar
+                        </agent>
+                    </agents>
+                </configuration>
             </plugin>
         </plugins>
     </build>
