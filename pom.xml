@@ -28,6 +28,12 @@
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>io.honeycomb</groupId>
+            <artifactId>honeycomb-opentelemetry-sdk</artifactId>
+            <version>0.3.0</version>
+        </dependency>
+
     </dependencies>
 
     <build>
@@ -39,7 +45,7 @@
                     <environmentVariables>
                         <SAMPLE_RATE>1</SAMPLE_RATE>
                         <SERVICE_NAME>fibonacci</SERVICE_NAME>
-<!--                        <HONEYCOMB_API_KEY>define this in your runtime env vars</HONEYCOMB_API_KEY>-->
+                        <!--                        <HONEYCOMB_API_KEY>define this in your runtime env vars</HONEYCOMB_API_KEY>-->
                         <HONEYCOMB_DATASET>otel-java</HONEYCOMB_DATASET>
                     </environmentVariables>
                     <agents>
