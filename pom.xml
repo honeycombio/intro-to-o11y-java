@@ -35,6 +35,11 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+<!--                <configuration>-->
+<!--                    <agent>-->
+<!--                        PATH to JAR=port=XXXX-->
+<!--                    </agent>-->
+<!--                </configuration>-->
             </plugin>
         </plugins>
     </build>
