@@ -16,18 +16,6 @@
     <properties>
         <java.version>8</java.version>
     </properties>
-    <dependencyManagement>
-        <dependencies>
-            <dependency>
-                <groupId>io.opentelemetry</groupId>
-                <artifactId>opentelemetry-bom</artifactId>
-                <version>1.5.0</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-        </dependencies>
-    </dependencyManagement>
-
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -39,32 +27,12 @@
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
-        <dependency>
-            <groupId>io.grpc</groupId>
-            <artifactId>
-                grpc-netty
-            </artifactId>
-            <version>1.40.0</version>
-        </dependency>
+
         <dependency>
             <groupId>io.opentelemetry</groupId>
-            <artifactId>opentelemetry-exporter-logging</artifactId>
+            <artifactId>opentelemetry-api</artifactId>
+            <version>1.5.0</version>
         </dependency>
-        <dependency>
-            <groupId>io.opentelemetry</groupId>
-            <artifactId>opentelemetry-sdk</artifactId>
-            <!--            <version>1.2.0</version>-->
-        </dependency>
-        <dependency>
-            <groupId>io.opentelemetry</groupId>
-            <artifactId>opentelemetry-exporter-otlp</artifactId>
-            <!--            <version>0.9.1</version>-->
-        </dependency>
-        <!--        <dependency>-->
-        <!--            <groupId>io.honeycomb</groupId>-->
-        <!--            <artifactId>honeycomb-opentelemetry-sdk</artifactId>-->
-        <!--            <version>0.3.0</version>-->
-        <!--        </dependency>-->
 
     </dependencies>
 
@@ -80,11 +48,11 @@
                         <!--                        <HONEYCOMB_API_KEY>define this in your runtime env vars</HONEYCOMB_API_KEY>-->
                         <HONEYCOMB_DATASET>otel-java</HONEYCOMB_DATASET>
                     </environmentVariables>
-                    <!--                    <agents>-->
-                    <!--                        <agent>-->
-                    <!--                            honeycomb-opentelemetry-javaagent-0.4.0-all.jar-->
-                    <!--                        </agent>-->
-                    <!--                    </agents>-->
+                    <agents>
+                        <agent>
+                            honeycomb-opentelemetry-javaagent-0.4.0-all.jar
+                        </agent>
+                    </agents>
                 </configuration>
             </plugin>
         </plugins>
