@@ -28,11 +28,17 @@
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
+<!--        <dependency>-->
+<!--            <groupId>io.opentelemetry</groupId>-->
+<!--            <artifactId>opentelemetry-api</artifactId>-->
+<!--            <version>1.2.0</version>-->
+<!--        </dependency>-->
         <dependency>
-            <groupId>io.opentelemetry</groupId>
-            <artifactId>opentelemetry-api</artifactId>
-            <version>1.2.0</version>
+            <groupId>io.honeycomb</groupId>
+            <artifactId>honeycomb-opentelemetry-sdk</artifactId>
+            <version>0.3.0</version>
         </dependency>
+
     </dependencies>
 
     <build>
