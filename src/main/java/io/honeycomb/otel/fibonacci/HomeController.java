@@ -16,12 +16,12 @@ public class HomeController {
         "You give it the index into the sequence, and it returns the Fibonacci number.</p>" +
         "<p>Click some of these links to call it:</p>" +
         "<ul>" +
-        "<li><a href=\"/fib?i=0\">/fib?i=0</a></li>" +
-        "<li><a href=\"/fib?i=1\">/fib?i=1</a></li>" +
-        "<li><a href=\"/fib?i=2\">/fib?i=2</a></li>" +
-        "<li><a href=\"/fib?i=3\">/fib?i=3</a></li>" +
-        "<li><a href=\"/fib?i=4\">/fib?i=4</a></li>" +
-        "<li><a href=\"/fib?i=5\">/fib?i=5</a></li>" +
+        "<li><a href=\"/fib?index=0\">/fib?index=0</a></li>" +
+        "<li><a href=\"/fib?index=1\">/fib?index=1</a></li>" +
+        "<li><a href=\"/fib?index=2\">/fib?index=2</a></li>" +
+        "<li><a href=\"/fib?index=3\">/fib?index=3</a></li>" +
+        "<li><a href=\"/fib?index=4\">/fib?index=4</a></li>" +
+        "<li><a href=\"/fib?index=5\">/fib?index=5</a></li>" +
         "</ul>";
     return "<html><head><link rel=\"stylesheet\" type=\"text/css\" href=\"styles.css\"/></head><body><main>" + main + "</main></body></html>";
   }
