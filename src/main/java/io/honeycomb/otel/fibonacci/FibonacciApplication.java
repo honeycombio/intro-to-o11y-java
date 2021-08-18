@@ -3,10 +3,12 @@ package io.honeycomb.otel.fibonacci;
 import io.opentelemetry.api.OpenTelemetry;
 import io.opentelemetry.api.trace.propagation.W3CTraceContextPropagator;
 import io.opentelemetry.context.propagation.ContextPropagators;
+import io.opentelemetry.exporter.logging.LoggingSpanExporter;
 import io.opentelemetry.exporter.otlp.trace.OtlpGrpcSpanExporter;
 import io.opentelemetry.sdk.OpenTelemetrySdk;
 import io.opentelemetry.sdk.trace.SdkTracerProvider;
 import io.opentelemetry.sdk.trace.export.BatchSpanProcessor;
+import io.opentelemetry.sdk.trace.export.SimpleSpanProcessor;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.client.RestTemplateBuilder;
@@ -32,12 +34,16 @@ public class FibonacciApplication {
 								OtlpGrpcSpanExporter.builder()
 										.build()).
 								build())
+				.addSpanProcessor(SimpleSpanProcessor.create(new LoggingSpanExporter()))
 				.build();
 
 		OpenTelemetry openTelemetry = OpenTelemetrySdk.builder()
 				.setTracerProvider(sdkTracerProvider)
 				.setPropagators(ContextPropagators.create(W3CTraceContextPropagator.getInstance()))
 				.buildAndRegisterGlobal();
+
+		openTelemetry.getTracer("poo").spanBuilder("butts")
+				.setAttribute("carrot", "lizard").startSpan().end();
 
 		SpringApplication.run(FibonacciApplication.class, args);
 	}
