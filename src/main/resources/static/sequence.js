@@ -57,7 +57,7 @@ function addNumbersToSequence(startingIndex) {
       response
         .json()
         .then(obj => {
-          n = obj.fibonacciNumber;
+          const n = obj.fibonacciNumber;
           placeToPutTheNumber.replaceChildren(formatFibonacciNumber(n));
           addNumbersToSequence(i + 1); // recurse
         }, err => {
