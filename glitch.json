@@ -1,0 +1,14 @@
+{
+  "start": "echo 'here we go!' && mvn spring-boot:run",
+  "install": "echo 'compiling' && mvn clean compile",
+  "watch": {
+    "throttle": 500,
+    "install": {
+      "include": ["^pom\\.xml$"],
+      "exclude": ["README.md"]
+    },
+    "restart": {
+      "include": ["\\.java$"]
+    }
+  }
+}

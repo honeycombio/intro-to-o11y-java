@@ -6,56 +6,44 @@ a whole microservice ecosystem with just one service!
 
 ## What to do
 
-First, clone this repo and run the application.
+You can remix this app on Glitch or clone the repo and open it in IntelliJ.
 
-IntelliJ: Open it in your IDE and right-click on the FibonacciApplication class and choose 'run'
+In IntelliJ, add a run configuration for Maven target `spring-boot:run`. Then hit the home page at http://localhost:8080.
 
-Command line: `mvn spring-boot:run`
+### Autoinstrument!
 
-Then hit the home page at http://localhost:8080
-
-## How to add tracing: 
-
-### Autoinstrumentation
 This will make tracing happen in the Spring app with no code changes!
 You'll see the web requests coming in. They'll even nest inside each other when the service calls itself. You will not
 see anything specific to this app, like the query parameter on the request.
 
-To do the autoinstrumentation:
+This magic happens through [instrumentation](https://docs.oracle.com/en/java/javase/11/docs/api/java.instrument/java/lang/instrument/Instrumentation.html) by a Java agent.
+The agent gloms onto your Java app, recognizes Spring receiving HTTP requests, and emits events.
 
-It takes 2 changes to how you run the app: some environment variables and an extra JVM argument.
+There's a general OpenTelemetry Java agent, and [Honeycomb wraps it into a version]
+https://github.com/honeycombio/honeycomb-opentelemetry-java#agent-usage) that's easier to configure. we'll use that one.
 
-The environment variables are:
-```
-SAMPLE_RATE=1
-SERVICE_NAME=my-favorite-service
-HONEYCOMB_API_KEY=replace-this-with-a-real-api-key
-HONEYCOMB_DATASET=my-dataset
-```
+#### Get the agent
 
-The extra JVM argument is a Java Agent:
+Download the agent jar [from this direct link](https://github.com/honeycombio/honeycomb-opentelemetry-java/releases/download/v0.4.0/honeycomb-opentelemetry-javaagent-0.4.0-all.jar).
+In Glitch, click Tools, the Command Line, and then do this:
 
-`-javaagent:honeycomb-opentelemetry-javaagent-0.4.0-all.jar`
+`wget https://github.com/honeycombio/honeycomb-opentelemetry-java/releases/download/v0.4.0/honeycomb-opentelemetry-javaagent-0.4.0-all.jar`
 
-...which means you need that jar in your current directory. Download the jar [as instructed here](
-https://github.com/honeycombio/honeycomb-opentelemetry-java#agent-usage),
- or ([from this direct link](https://github.com/honeycombio/honeycomb-opentelemetry-java/releases/download/v0.4.0/honeycomb-opentelemetry-javaagent-0.4.0-all.jar))
+`sync` (this tells glitch to notice what you did at the command line)
 
-You can specify the JVM arguments either in your IntelliJ configuration, or...
+#### Attach the agent
 
-mvn:spring-boot run` will read agents from the POM, so add this configuration to the spring-boot-maven-pluigin section:
+The goal is to add a JVM argument: `-javaagent:honeycomb-opentelemetry-javaagent-0.4.0-all.jar`
+
+To add this to `mvn spring-boot:run`,
+open `pom.xml`, find the `plugin` block for `spring-boot-maven-plugin`, and 
+add a `configuration` block like the one here:
 
 ```xml
  <plugin>
     <groupId>org.springframework.boot</groupId>
     <artifactId>spring-boot-maven-plugin</artifactId>
     <configuration>
-        <environmentVariables>
-            <SAMPLE_RATE>1</SAMPLE_RATE>
-            <SERVICE_NAME>fibonacci</SERVICE_NAME>
-<!--                        <HONEYCOMB_API_KEY>define this in your runtime env vars</HONEYCOMB_API_KEY>-->
-            <HONEYCOMB_DATASET>otel-java</HONEYCOMB_DATASET>
-        </environmentVariables>
         <agents>
             <agent>
                 honeycomb-opentelemetry-javaagent-0.4.0-all.jar
@@ -65,5 +53,24 @@ mvn:spring-boot run` will read agents from the POM, so add this configuration to
 </plugin>
 ```
 
-Then define the HONEYCOMB_API_KEY separately (don't commit it to your repo).
+#### Configure the Agent
 
+Finally, tell the agent how to send events to Honeycomb.
+In `.env` in glitch or your run configuration in IntelliJ, add these
+environment variables:
+
+```
+HONEYCOMB_API_KEY=replace-this-with-a-real-api-key
+HONEYCOMB_DATASET=otel-java
+SERVICE_NAME=fibonacci-microservice
+SAMPLE_RATE=1
+```
+
+Get a Honeycomb API Key from your Team Settings in [Honeycomb](https://ui.honeycomb.io).
+(find this by clicking on your profile in the lower-left corner.)
+
+You can name the Honeycomb Dataset anything you want.
+
+You can choose any Service Name you want.
+
+The Sample Rate determines how many requests each saved trace represents; 1 means "keep all of them."" Right now you want all of them.

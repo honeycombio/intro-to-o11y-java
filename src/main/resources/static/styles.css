@@ -9,3 +9,11 @@ main {
 ul {
   font-family: sans-serif;
 }
+
+ .fibonacci-sequence {
+        margin:20px;
+        padding:10px;
+        font-family: Monospace;
+        font-size:larger;
+        border: 1px black solid;
+      }
