@@ -50,15 +50,16 @@ function addNumbersToSequence(startingIndex) {
   placeToPutTheNumber.appendChild(indicateLoading());
 
   const i = startingIndex;
-  const url = "/fib?i=" + i;
+  const url = "/fib?index=" + i;
   fetch(url).then(response => {
     if (response.ok) {
       console.log("ok for " + i);
       response
         .json()
-        .then(n => {
+        .then(obj => {
+          n = obj.fibonacciNumber;
           placeToPutTheNumber.replaceChildren(formatFibonacciNumber(n));
-          addNumbersToSequence(i + 1);
+          addNumbersToSequence(i + 1); // recurse
         }, err => {
           placeToPutTheNumber.replaceChildren(indicateError());
           console.log("parsing error on " + i);
@@ -73,7 +74,7 @@ function addNumbersToSequence(startingIndex) {
 function go() {
   stopRequested = false;
   putNumbersHere.replaceChildren();
-  addNumbersToSequence(1);
+  addNumbersToSequence(0);
 }
 
 goButton.addEventListener("click", go);
