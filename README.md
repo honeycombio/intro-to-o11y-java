@@ -91,7 +91,29 @@ Which trace has the most, and why is it different?
 ## 2. Customize a span
 
 Let's make it easier to see what the "index" query parameter is.
-Add it as a custom field in FibonacciController.getFibonacciNumber:
+
+To do this, change the code using the OpenTelemetry API.
+
+### Bring in the API
+
+Add these dependencies to add to `pom.xml`.
+
+```xml
+    <dependency>
+        <groupId>io.opentelemetry</groupId>
+        <artifactId>opentelemetry-api</artifactId>
+        <version>1.5.0</version>
+    </dependency>
+    <dependency>
+        <groupId>io.opentelemetry</groupId>
+        <artifactId>opentelemetry-extension-annotations</artifactId>
+        <version>1.5.0</version>
+    </dependency>
+```
+
+### Use the API in your code
+
+Now in `FibonacciController.getFibonacciNumber`, add the index parameter to the current Span:
 
 ```java
   Span span = Span.current();
