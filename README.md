@@ -1,4 +1,4 @@
-# Into to Observability: OpenTelemetry in Java
+# Intro to Observability: OpenTelemetry in Java
 
 This Spring Boot application is here for you to try out tracing.
 It consists of a microservice that calls itself, so you can simulate
@@ -6,8 +6,8 @@ a whole microservice ecosystem with just one service!
 
 ## What to do
 
-You can [remix this app on Glitch](https://glitch.com/~intro-to-o11y-java) or [clone the repo](https://github.com/jessitron/otel-java) and open it in IntelliJ.
-                                                                              
+You can remix this app on Glitch or [clone the repo](https://github.com/jessitron/otel-java) and open it in IntelliJ.
+
 (I recommend cloning the repo. Java in Glitch is verrrrry slooooow. This app on your computer is fast.)
 
 In IntelliJ, add a run configuration for Maven target `spring-boot:run`. Then hit the home page at http://localhost:8080.
@@ -75,7 +75,7 @@ You can name the Honeycomb Dataset anything you want.
 
 You can choose any Service Name you want.
 
-The Sample Rate determines how many requests each saved trace represents; 1 means "keep all of them."" Right now you want all of them.
+The Sample Rate determines how many requests each saved trace represents; 1 means "keep all of them." Right now you want all of them.
 
 #### See the results
 
@@ -96,7 +96,7 @@ Let's make it easier to see what the "index" query parameter is.
 
 To do this, change the code using the OpenTelemetry API.
 
-### Bring in the API
+### Bring in the OpenTelemetry API
 
 Add these dependencies to add to `pom.xml`.
 
@@ -115,7 +115,7 @@ Add these dependencies to add to `pom.xml`.
 
 ### Use the API in your code
 
-Now in `FibonacciController.getFibonacciNumber`, add the index parameter to the current Span:
+Now in `FibonacciController.java`, in the `getFibonacciNumber` method, add the index parameter to the current Span:
 
 ```java
   Span span = Span.current();
