@@ -1,5 +1,6 @@
 package io.honeycomb.otel.fibonacci;
 
+import io.opentelemetry.api.trace.Span;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -15,6 +16,8 @@ public class FibonacciController {
   @GetMapping("/fib")
   public FibonacciNumber getFibonacciNumber(@RequestParam(value = "index", defaultValue = "0") String index) {
     int i = Integer.parseInt(index);
+    
+    // add the custom attribute to the current span here
 
     if (i == 0) {
       return new FibonacciNumber(i, 0);
@@ -26,7 +29,8 @@ public class FibonacciController {
     FibonacciNumber ultimate = restTemplate.getForObject("http://localhost:8080/fib?index=" + (i - 1), FibonacciNumber.class);
     FibonacciNumber penultimate = restTemplate.getForObject("http://localhost:8080/fib?index=" + (i - 2), FibonacciNumber.class);
 
-    return new FibonacciNumber(i, ultimate.fibonacciNumber + penultimate.fibonacciNumber);
+    return new FibonacciNumber(i, penultimate.fibonacciNumber + ultimate.fibonacciNumber);
   }
-
+  
+  // make a new method annotated with @WithSpan to create a new span
 }
