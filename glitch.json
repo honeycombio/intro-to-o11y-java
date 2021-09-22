@@ -8,7 +8,7 @@
       "exclude": ["README.md"]
     },
     "restart": {
-      "include": ["\\.java$"]
+      "include": ["\\.java$", "\\.js$"]
     }
   }
 }
