@@ -6,11 +6,29 @@ a whole microservice ecosystem with just one service!
 
 ## What to do
 
-You can remix this app on Glitch or [clone the repo](https://github.com/jessitron/otel-java) and open it in IntelliJ.
+You can remix [this app on Glitch](https://glitch.com/~intro-to-o11y-java) or run locally for speed.
+
+### Running locally 
 
 (I recommend cloning the repo. Java in Glitch is verrrrry slooooow. This app on your computer is fast.)
 
-In IntelliJ, add a run configuration for Maven target `spring-boot:run`. Then hit the home page at http://localhost:8080.
+[clone the repo](https://github.com/jessitron/otel-java) 
+
+Download the Honeycomb OpenTelemetry Java agent into your project directory:
+
+`wget https://github.com/honeycombio/honeycomb-opentelemetry-java/releases/download/v0.6.1/honeycomb-opentelemetry-javaagent-0.6.1-all.jar`
+
+If you use IntelliJ, add a run configuration for Maven target `spring-boot:run`. Then hit the home page at http://localhost:8080.
+
+Or at the command line:
+
+set up the environment:
+```sh
+export HONEYCOMB_API_KEY=<your API key here>
+export HONEYCOMB_DATASET=otel-java # or whatever you like
+```
+
+Run the app with `mvn spring-boot:run`
 
 ### 1. Autoinstrument!
 
@@ -22,60 +40,23 @@ This magic happens through [instrumentation](https://docs.oracle.com/en/java/jav
 The agent gloms onto your Java app, recognizes Spring receiving HTTP requests, and emits events.
 
 There's a general OpenTelemetry Java agent, and [Honeycomb wraps it into a version]
-https://github.com/honeycombio/honeycomb-opentelemetry-java#agent-usage) that's easier to configure. we'll use that one.
+https://github.com/honeycombio/honeycomb-opentelemetry-java#agent-usage) that's easier to configure. This app uses that one.
 
-#### Get the agent
-
-Download the agent jar [from this direct link](https://github.com/honeycombio/honeycomb-opentelemetry-java/releases/download/v0.4.0/honeycomb-opentelemetry-javaagent-0.4.0-all.jar).
-In Glitch, click Tools, the Command Line, and then do this:
-
-`wget https://github.com/honeycombio/honeycomb-opentelemetry-java/releases/download/v0.4.0/honeycomb-opentelemetry-javaagent-0.4.0-all.jar`
-
-`sync` (this tells glitch to notice what you did at the command line)
-
-#### Attach the agent
-
-The goal is to add a JVM argument: `-javaagent:honeycomb-opentelemetry-javaagent-0.4.0-all.jar`
-
-To add this to `mvn spring-boot:run`,
-open `pom.xml`, find the `plugin` block for `spring-boot-maven-plugin`, and 
-add a `configuration` block like the one here:
-
-```xml
- <plugin>
-    <groupId>org.springframework.boot</groupId>
-    <artifactId>spring-boot-maven-plugin</artifactId>
-    <configuration>
-        <agents>
-            <agent>
-                honeycomb-opentelemetry-javaagent-0.4.0-all.jar
-            </agent>
-        </agents>
-    </configuration>
-</plugin>
-```
-
-#### Configure the Agent
+#### Configure tracing
 
 Finally, tell the agent how to send events to Honeycomb.
-In `.env` in glitch or your run configuration in IntelliJ, add these
+In `.env` in glitch, add these
 environment variables:
 
 ```
 HONEYCOMB_API_KEY=replace-this-with-a-real-api-key
 HONEYCOMB_DATASET=otel-java
-SERVICE_NAME=fibonacci-microservice
-SAMPLE_RATE=1
 ```
 
 Get a Honeycomb API Key from your Team Settings in [Honeycomb](https://ui.honeycomb.io).
 (find this by clicking on your profile in the lower-left corner.)
 
 You can name the Honeycomb Dataset anything you want.
-
-You can choose any Service Name you want.
-
-The Sample Rate determines how many requests each saved trace represents; 1 means "keep all of them." Right now you want all of them.
 
 #### See the results
 
@@ -145,3 +126,36 @@ Something like:
 
 After a restart, do your traces show this extra span? Do you see the name of your method?
 What percentage of the service time is spend in it?
+
+# Appendix: how to add autoinstrumentation to your own app:
+
+#### Get the agent
+
+Download the agent jar [from this direct link](https://github.com/honeycombio/honeycomb-opentelemetry-java/releases/download/v0.1.1/honeycomb-opentelemetry-javaagent-0.6.1-all.jar).
+In Glitch, click Tools, the Command Line, and then do this:
+
+`wget https://github.com/honeycombio/honeycomb-opentelemetry-java/releases/download/v0.6.1/honeycomb-opentelemetry-javaagent-0.6.1-all.jar`
+
+`sync` (this tells glitch to notice what you did at the command line)
+
+#### Attach the agent
+
+The goal is to add a JVM argument: `-javaagent:honeycomb-opentelemetry-javaagent-0.6.1-all.jar`
+
+To add this to `mvn spring-boot:run`,
+open `pom.xml`, find the `plugin` block for `spring-boot-maven-plugin`, and 
+add a `configuration` block like the one here:
+
+```xml
+ <plugin>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-maven-plugin</artifactId>
+    <configuration>
+        <agents>
+            <agent>
+                honeycomb-opentelemetry-javaagent-0.6.1-all.jar
+            </agent>
+        </agents>
+    </configuration>
+</plugin>
+```
