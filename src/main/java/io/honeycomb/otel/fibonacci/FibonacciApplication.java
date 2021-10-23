@@ -10,6 +10,8 @@ import org.springframework.web.client.RestTemplate;
 public class FibonacciApplication {
 
 	public static void main(String[] args) {
+
+		
 		SpringApplication.run(FibonacciApplication.class, args);
 	}
 
