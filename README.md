@@ -25,7 +25,7 @@ Or at the command line:
 set up the environment:
 ```sh
 export HONEYCOMB_API_KEY=<your API key here>
-export HONEYCOMB_DATASET=otel-java # or whatever you like
+export HONEYCOMB_TRACES_DATASET=otel-java # or whatever you like
 ```
 
 Run the app with `mvn spring-boot:run`
@@ -50,7 +50,7 @@ environment variables:
 
 ```
 HONEYCOMB_API_KEY=replace-this-with-a-real-api-key
-HONEYCOMB_DATASET=otel-java
+HONEYCOMB_TRACES_DATASET=otel-java
 ```
 
 Get a Honeycomb API Key from your Team Settings in [Honeycomb](https://ui.honeycomb.io).
@@ -77,28 +77,13 @@ Let's make it easier to see what the "index" query parameter is.
 
 To do this, change the code using the OpenTelemetry API.
 
-### Bring in the OpenTelemetry API
-
-Add these dependencies to add to `pom.xml`.
-
-```xml
-    <dependency>
-        <groupId>io.opentelemetry</groupId>
-        <artifactId>opentelemetry-api</artifactId>
-        <version>1.5.0</version>
-    </dependency>
-    <dependency>
-        <groupId>io.opentelemetry</groupId>
-        <artifactId>opentelemetry-extension-annotations</artifactId>
-        <version>1.5.0</version>
-    </dependency>
-```
-
 ### Use the API in your code
 
-Now in `FibonacciController.java`, in the `getFibonacciNumber` method, add the index parameter to the current Span:
+In `FibonacciController.java`, in the `getFibonacciNumber` method, add the index parameter to the current Span:
 
 ```java
+import io.opentelemetry.api.trace.Span;
+
   Span span = Span.current();
   span.setAttribute("parameter.index", i);
 ```
@@ -118,6 +103,8 @@ magical `@WithSpan` attribute.
 Something like:
 
 ```java
+import io.opentelemetry.extension.annotations.WithSpan;
+
   @WithSpan
   private FibonacciNumber calculate(int index, FibonacciNumber previous, FibonacciNumber oneBeforeThat) {
     return new FibonacciNumber(index, previous.fibonacciNumber + oneBeforeThat.fibonacciNumber);
@@ -127,7 +114,9 @@ Something like:
 After a restart, do your traces show this extra span? Do you see the name of your method?
 What percentage of the service time is spend in it?
 
-# Appendix: how to add autoinstrumentation to your own app:
+# Appendix: how to add autoinstrumentation to your own app
+
+Find details (and the latest) in [Honeycomb's docs](https://docs.honeycomb.io/getting-data-in/java/opentelemetry-distro/).
 
 #### Get the agent
 
@@ -158,4 +147,21 @@ add a `configuration` block like the one here:
         </agents>
     </configuration>
 </plugin>
+```
+
+### Bring in the OpenTelemetry API for custom tracing
+
+Add these dependencies to add to `pom.xml`.
+
+```xml
+    <dependency>
+        <groupId>io.opentelemetry</groupId>
+        <artifactId>opentelemetry-api</artifactId>
+        <version>1.5.0</version>
+    </dependency>
+    <dependency>
+        <groupId>io.opentelemetry</groupId>
+        <artifactId>opentelemetry-extension-annotations</artifactId>
+        <version>1.5.0</version>
+    </dependency>
 ```
