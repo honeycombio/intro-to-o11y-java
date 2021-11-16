@@ -6,51 +6,31 @@ a whole microservice ecosystem with just one service!
 
 ## What to do
 
-You can remix [this app on Glitch](https://glitch.com/~intro-to-o11y-java) or run locally for speed.
-
-### Running locally 
-
-(I recommend cloning the repo. Java in Glitch is verrrrry slooooow. This app on your computer is fast.)
+Sadly, this app doesn't produce good traces on Glitch. Please [clone a repo](https://github.com/jessitron/otel-java)  locally.
 
 [clone the repo](https://github.com/jessitron/otel-java) 
 
-Download the Honeycomb OpenTelemetry Java agent into your project directory:
+## Configure tracing
 
-`wget https://github.com/honeycombio/honeycomb-opentelemetry-java/releases/download/v0.6.1/honeycomb-opentelemetry-javaagent-0.6.1-all.jar`
+### Get the java agent
 
-If you use IntelliJ, add a run configuration for Maven target `spring-boot:run`. Then hit the home page at http://localhost:8080.
+Download the Honeycomb OpenTelemetry Java agent into your project directory
+from [this direct download link](https://github.com/honeycombio/honeycomb-opentelemetry-java/releases/download/v0.6.1/honeycomb-opentelemetry-javaagent-0.6.1-all.jar)
+or from the [releases page](https://github.com/honeycombio/honeycomb-opentelemetry-java/releases).
 
-Or at the command line:
+or from a linux command line: `wget https://github.com/honeycombio/honeycomb-opentelemetry-java/releases/download/v0.6.1/honeycomb-opentelemetry-javaagent-0.6.1-all.jar`
 
-set up the environment:
+### Configure tracing
+
+You need two environment variables.
+
+If you use IntelliJ, add a run configuration for Maven target `spring-boot:run`. Configure its environment variables as below.
+
+Or at the command line, set up the environment:
+
 ```sh
 export HONEYCOMB_API_KEY=<your API key here>
 export HONEYCOMB_TRACES_DATASET=otel-java # or whatever you like
-```
-
-Run the app with `mvn spring-boot:run`
-
-### 1. Autoinstrument!
-
-This will make tracing happen in the Spring app with no code changes!
-You'll see the web requests coming in. They'll even nest inside each other when the service calls itself. You will not
-see anything specific to this app, like the query parameter on the request.
-
-This magic happens through [instrumentation](https://docs.oracle.com/en/java/javase/11/docs/api/java.instrument/java/lang/instrument/Instrumentation.html) by a Java agent.
-The agent gloms onto your Java app, recognizes Spring receiving HTTP requests, and emits events.
-
-There's a general OpenTelemetry Java agent, and [Honeycomb wraps it into a version]
-https://github.com/honeycombio/honeycomb-opentelemetry-java#agent-usage) that's easier to configure. This app uses that one.
-
-#### Configure tracing
-
-Finally, tell the agent how to send events to Honeycomb.
-In `.env` in glitch, add these
-environment variables:
-
-```
-HONEYCOMB_API_KEY=replace-this-with-a-real-api-key
-HONEYCOMB_TRACES_DATASET=otel-java
 ```
 
 Get a Honeycomb API Key from your Team Settings in [Honeycomb](https://ui.honeycomb.io).
@@ -58,9 +38,18 @@ Get a Honeycomb API Key from your Team Settings in [Honeycomb](https://ui.honeyc
 
 You can name the Honeycomb Dataset anything you want.
 
-#### See the results
+## Run
 
-Run the app. Activate the sequence of numbers.
+Run the app:
+
+`mvn spring-boot:run`
+
+Once the Spring banner passes and the logs hold still, hit it at [http://localhost:8080]().
+
+Activate the sequence of numbers. When it gets a bit slower, push Stop.
+
+### See the results
+
 Go to [Honeycomb](https://ui.honeycomb.io) and choose the Dataset you configured.
 
 How many traces are there?
@@ -115,6 +104,13 @@ After a restart, do your traces show this extra span? Do you see the name of you
 What percentage of the service time is spend in it?
 
 # Appendix: how to add autoinstrumentation to your own app
+
+This magic happens through [instrumentation](https://docs.oracle.com/en/java/javase/11/docs/api/java.instrument/java/lang/instrument/Instrumentation.html) by a Java agent.
+The agent gloms onto your Java app, recognizes Spring receiving HTTP requests, and emits events.
+
+There's a general OpenTelemetry Java agent, and [Honeycomb wraps it into a version]
+https://github.com/honeycombio/honeycomb-opentelemetry-java#agent-usage) that's easier to configure. This app uses that one.
+
 
 Find details (and the latest) in [Honeycomb's docs](https://docs.honeycomb.io/getting-data-in/java/opentelemetry-distro/).
 
