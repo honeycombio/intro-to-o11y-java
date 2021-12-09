@@ -17,27 +17,33 @@ to be opened in a container.
 
 This is a jar that runs alongside your program, and injects bytecode for tracing.
 
+(if you're using the devcontainer, this step will be done for you.)
+
 Download the Honeycomb OpenTelemetry Java agent into your project directory
-from [this direct download link](https://github.com/honeycombio/honeycomb-opentelemetry-java/releases/download/v0.6.1/honeycomb-opentelemetry-javaagent-0.6.1-all.jar)
+from [this direct download link](https://github.com/honeycombio/honeycomb-opentelemetry-java/releases/download/v0.7.0/honeycomb-opentelemetry-javaagent-0.7.0.jar)
 or from the [releases page](https://github.com/honeycombio/honeycomb-opentelemetry-java/releases).
 
-or from a linux command line (including the devcontainer): `wget https://github.com/honeycombio/honeycomb-opentelemetry-java/releases/download/v0.6.1/honeycomb-opentelemetry-javaagent-0.6.1-all.jar`
+or from a linux command line (including the devcontainer): `wget https://github.com/honeycombio/honeycomb-opentelemetry-java/releases/download/v0.7.0/honeycomb-opentelemetry-javaagent-0.7.0.jar`
 
 ### Configure tracing
 
 You need two environment variables.
 
+Get a Honeycomb API Key from your Team Settings in [Honeycomb](https://ui.honeycomb.io).
+(find this by clicking on your profile in the lower-left corner.)
+
+#### Set the environment variables
+
+You can set these in `pom.xml` if you uncomment the HONEYCOMB_API_KEY line, but then don't commit that change to git. Or more securely:
+
 If you use IntelliJ, add a run configuration for Maven target `spring-boot:run`. Configure its environment variables as below.
 
-Or at the command line, set up the environment:
+At the command line, set up the environment:
 
 ```sh
 export HONEYCOMB_API_KEY=<your API key here>
 export HONEYCOMB_TRACES_DATASET=otel-java # or whatever you like
 ```
-
-Get a Honeycomb API Key from your Team Settings in [Honeycomb](https://ui.honeycomb.io).
-(find this by clicking on your profile in the lower-left corner.)
 
 You can name the Honeycomb Dataset anything you want.
 

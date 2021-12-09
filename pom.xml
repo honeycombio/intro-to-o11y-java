@@ -50,11 +50,11 @@
                         <SAMPLE_RATE>1</SAMPLE_RATE>
                         <SERVICE_NAME>fibonacci</SERVICE_NAME>
                         <!--                        <HONEYCOMB_API_KEY>define this in your runtime env vars</HONEYCOMB_API_KEY>-->
-                        <HONEYCOMB_DATASET>otel-java</HONEYCOMB_DATASET>
+                        <HONEYCOMB_TRACES_DATASET>otel-java</HONEYCOMB_TRACES_DATASET>
                     </environmentVariables>
                     <agents>
                         <agent>
-                            honeycomb-opentelemetry-javaagent-0.6.1-all.jar
+                            honeycomb-opentelemetry-javaagent-0.7.0.jar
                         </agent>
                     </agents>
                 </configuration>
