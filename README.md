@@ -6,19 +6,22 @@ a whole microservice ecosystem with just one service!
 
 ## What to do
 
-Sadly, this app doesn't produce good traces on Glitch. Please [clone a repo](https://github.com/jessitron/otel-java)  locally.
+Clone this repository. It expects that you have Java and Maven installed.
 
-[clone the repo](https://github.com/jessitron/otel-java) 
+If you use [VSCode devcontainers](https://code.visualstudio.com/docs/remote/containers-tutorial), this repository is configured
+to be opened in a container. 
 
 ## Configure tracing
 
 ### Get the java agent
 
+This is a jar that runs alongside your program, and injects bytecode for tracing.
+
 Download the Honeycomb OpenTelemetry Java agent into your project directory
 from [this direct download link](https://github.com/honeycombio/honeycomb-opentelemetry-java/releases/download/v0.6.1/honeycomb-opentelemetry-javaagent-0.6.1-all.jar)
 or from the [releases page](https://github.com/honeycombio/honeycomb-opentelemetry-java/releases).
 
-or from a linux command line: `wget https://github.com/honeycombio/honeycomb-opentelemetry-java/releases/download/v0.6.1/honeycomb-opentelemetry-javaagent-0.6.1-all.jar`
+or from a linux command line (including the devcontainer): `wget https://github.com/honeycombio/honeycomb-opentelemetry-java/releases/download/v0.6.1/honeycomb-opentelemetry-javaagent-0.6.1-all.jar`
 
 ### Configure tracing
 
@@ -116,12 +119,7 @@ Find details (and the latest) in [Honeycomb's docs](https://docs.honeycomb.io/ge
 
 #### Get the agent
 
-Download the agent jar [from this direct link](https://github.com/honeycombio/honeycomb-opentelemetry-java/releases/download/v0.1.1/honeycomb-opentelemetry-javaagent-0.6.1-all.jar).
-In Glitch, click Tools, the Command Line, and then do this:
-
-`wget https://github.com/honeycombio/honeycomb-opentelemetry-java/releases/download/v0.6.1/honeycomb-opentelemetry-javaagent-0.6.1-all.jar`
-
-`sync` (this tells glitch to notice what you did at the command line)
+See [above](#get-the-java-agent).
 
 #### Attach the agent
 
