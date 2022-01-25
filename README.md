@@ -188,7 +188,13 @@ If out of date:
 * delete the old one
 * update the version in the `agent` section of `pom.xml`
 
+### OTel libraries
 
+Check the [README](https://github.com/honeycombio/honeycomb-opentelemetry-java/blob/main/README.md) of the Honeycomb distro
+for the current version of OTel.
+
+Make the `io.opentelemetry` dependencies in `pom.xml` match that.
+Test the app.
 
 ## FAQ
 
