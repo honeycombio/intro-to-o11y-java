@@ -25,4 +25,5 @@ RUN if [ "${NODE_VERSION}" != "none" ]; then su vscode -c "umask 0002 && . /usr/
 # RUN su vscode -c "source /usr/local/share/nvm/nvm.sh && npm install -g <your-package-here>" 2>&1
 
 # Download the agent we need
-RUN wget https://github.com/honeycombio/honeycomb-opentelemetry-java/releases/download/v0.7.0/honeycomb-opentelemetry-javaagent-0.7.0.jar
+# update: nah let's put it in the repo
+# RUN wget https://github.com/honeycombio/honeycomb-opentelemetry-java/releases/download/v0.7.0/honeycomb-opentelemetry-javaagent-0.7.0.jar
