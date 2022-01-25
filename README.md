@@ -12,26 +12,22 @@ Recommended:
 
 Alternative:
 
-Clone this repository. It expects that you have Java and Maven installed. 
+Clone this repository. It expects that you have Java and Maven installed.
 
 If you use [VSCode devcontainers](https://code.visualstudio.com/docs/remote/containers-tutorial), this repository is configured
 to be opened in a container. 
 
+### starting the app
+
+`mvn spring-boot:run`
+
+or with the script:
+
+`./run`
+
 ## Configure tracing
 
-### Get the java agent
-
-This is a jar that runs alongside your program, and injects bytecode for tracing.
-
-(if you're using the devcontainer, this step will be done for you.)
-
-Download the Honeycomb OpenTelemetry Java agent into your project directory
-from [this direct download link](https://github.com/honeycombio/honeycomb-opentelemetry-java/releases/download/v0.7.0/honeycomb-opentelemetry-javaagent-0.7.0.jar)
-or from the [releases page](https://github.com/honeycombio/honeycomb-opentelemetry-java/releases).
-
-or from a linux command line (including the devcontainer): `wget https://github.com/honeycombio/honeycomb-opentelemetry-java/releases/download/v0.7.0/honeycomb-opentelemetry-javaagent-0.7.0.jar`
-
-### Configure tracing
+This can be done in appsetting.json if you like, but try not to commit your API key to git.
 
 You need two environment variables.
 
@@ -131,7 +127,13 @@ Find details (and the latest) in [Honeycomb's docs](https://docs.honeycomb.io/ge
 
 #### Get the agent
 
-See [above](#get-the-java-agent).
+This is a jar that runs alongside your program, and injects bytecode for tracing.
+
+Download the Honeycomb OpenTelemetry Java agent into your project directory
+from [this direct download link](https://github.com/honeycombio/honeycomb-opentelemetry-java/releases/download/v0.8.1/honeycomb-opentelemetry-javaagent-0.8.1.jar)
+or from the [releases page](https://github.com/honeycombio/honeycomb-opentelemetry-java/releases).
+
+or from a linux command line (including the devcontainer): `wget https://github.com/honeycombio/honeycomb-opentelemetry-java/releases/download/v0.8.1/honeycomb-opentelemetry-javaagent-0.8.1.jar`
 
 #### Attach the agent
 
@@ -148,7 +150,7 @@ add a `configuration` block like the one here:
     <configuration>
         <agents>
             <agent>
-                honeycomb-opentelemetry-javaagent-0.6.1-all.jar
+                honeycomb-opentelemetry-javaagent-0.8.1.jar
             </agent>
         </agents>
     </configuration>
@@ -171,3 +173,28 @@ Add these dependencies to add to `pom.xml`.
         <version>1.5.0</version>
     </dependency>
 ```
+
+## Updating this repo
+
+### Honeycomb distro
+
+Check the version of the agent in the [Releases](https://github.com/honeycombio/honeycomb-opentelemetry-java/releases)
+ page of Honeycomb OpenTelemetry Distribution for Java.
+ Compare to the jar in the root of this repo.
+
+If out of date:
+* update the version in this file (many times, including the next line)
+* download the new one: `wget https://github.com/honeycombio/honeycomb-opentelemetry-java/releases/download/v0.8.1/honeycomb-opentelemetry-javaagent-0.8.1.jar`
+* delete the old one
+* update the version in the `agent` section of `pom.xml`
+
+
+
+## FAQ
+
+**How do I open this project in IntelliJ IDEA?**
+
+You're welcome to use the IDE you're comfortable with. 
+
+But setting up IntelliJ is out of scope for this document. It is possible, but strangely hard (in my experience).
+
