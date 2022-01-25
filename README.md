@@ -17,7 +17,7 @@ Clone this repository. It expects that you have Java and Maven installed.
 If you use [VSCode devcontainers](https://code.visualstudio.com/docs/remote/containers-tutorial), this repository is configured
 to be opened in a container. 
 
-### starting the app
+### Start the app
 
 `mvn spring-boot:run`
 
@@ -25,31 +25,44 @@ or with the script:
 
 `./run`
 
-## Configure tracing
+### See the app
 
-This can be done in appsetting.json if you like, but try not to commit your API key to git.
+In GitPod: while it's running, click "Remote Explorer" on the left sidebar; then expand "ports" and look for a "preview" button.
+
+Locally: [http://localhost:8080]()
+
+Activate the sequence of numbers by pushing **Go**. After you see numbers, push **Stop**. Try this a few times.
+
+### Stop the app
+
+Push `Ctrl-C` in the terminal where the app is running
+
+## Configure tracing: Connect to Honeycomb
+
+If the app is running, stop it. Until...
 
 You need two environment variables.
 
 Get a Honeycomb API Key from your Team Settings in [Honeycomb](https://ui.honeycomb.io).
 (find this by clicking on your profile in the lower-left corner.)
 
-#### Set the environment variables
+Recommended: set the variables at the command line before running the app.
 
-You can set these in `pom.xml` if you uncomment the HONEYCOMB_API_KEY line, but then don't commit that change to git. Or more securely:
+```
+export HONEYCOMB_API_KEY=<your api key here>
+export HONEYCOMB_DATASET=hello-observability # or whatever you want to name it
 
-If you use IntelliJ, add a run configuration for Maven target `spring-boot:run`. Configure its environment variables as below.
-
-At the command line, set up the environment:
-
-```sh
-export HONEYCOMB_API_KEY=<your API key here>
-export HONEYCOMB_TRACES_DATASET=otel-java # or whatever you like
+./run
 ```
 
-You can name the Honeycomb Dataset anything you want.
+Alternative: You can set these in `pom.xml` if you uncomment the HONEYCOMB_API_KEY line, but then don't commit that change to git.
 
-## Run
+Alternative: If you use IntelliJ, add a run configuration for Maven target `spring-boot:run`. Configure its environment variables as below.
+
+Alternative: in GitPod, you can set [variables](https://gitpod.io/variables) to be available in `*/*` workspaces.
+
+
+### Run the app again
 
 Run the app:
 
@@ -57,21 +70,15 @@ Run the app:
 
 Once the Spring banner passes and the logs hold still, hit it at [http://localhost:8080]().
 
-Activate the sequence of numbers. When it gets a bit slower, push Stop.
+Activate the sequence of numbers by pushing **Go**. After you see numbers, push **Stop**. Try this a few times.
 
 ### See the results
 
 Go to [Honeycomb](https://ui.honeycomb.io) and choose the Dataset you configured.
 
-How many traces are there?
+Do you see data in the graphs? Success!
 
-How many spans are in the traces?
-
-Why are there so many??
-
-Which trace has the most, and why is it different?
-
-## 2. Customize a span
+# Part 3 of the workshop: Customize a span
 
 Let's make it easier to see what the "index" query parameter is.
 
@@ -92,7 +99,7 @@ Restart the app, make the sequence go, and find that field on the new spans.
 
 Can you make the trace waterfall view show the index? What pattern does it show?
 
-## 3. Create a custom span
+## Advanced: Create a custom span
 
 Make the calculation into its own span, to see how much of the time spent on
 this service is the meat: adding the fibonacci numbers.
