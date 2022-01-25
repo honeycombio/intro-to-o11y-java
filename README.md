@@ -6,7 +6,13 @@ a whole microservice ecosystem with just one service!
 
 ## What to do
 
-Clone this repository. It expects that you have Java and Maven installed.
+Recommended:
+
+[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/honeycombio/intro-to-o11y-java)
+
+Alternative:
+
+Clone this repository. It expects that you have Java and Maven installed. 
 
 If you use [VSCode devcontainers](https://code.visualstudio.com/docs/remote/containers-tutorial), this repository is configured
 to be opened in a container. 
