@@ -1,4 +1,7 @@
-HELP.md
+# don't commit our API key
+.env
+
+# java
 target/
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/

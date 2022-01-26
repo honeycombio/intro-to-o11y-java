@@ -1,1 +1,9 @@
+#!/bin/bash
+
+if [ -f ".env" ]
+then
+  echo "Reading .env"
+  source .env
+fi
+
 mvn spring-boot:run

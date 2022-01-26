@@ -46,7 +46,21 @@ You need two environment variables.
 Get a Honeycomb API Key from your Team Settings in [Honeycomb](https://ui.honeycomb.io).
 (find this by clicking on your profile in the lower-left corner.)
 
-Recommended: set the variables at the command line before running the app.
+Recommended: Let's put them in a file (and then not commit it).
+
+Create a .env file:
+
+`cp .env.example .env`
+
+Now open `.env`, and populate the environment variables. (This file will be ignored by git, so you won't commit your API key.)
+
+```
+export HONEYCOMB_API_KEY=replace-this-with-a-real-api-key # important and unique to you
+export HONEYCOMB_DATASET=hello-observability # can be any name
+export SERVICE_NAME=fib-microsvc # can be any name
+```
+
+Alternative: set the variables at the command line before running the app.
 
 ```
 export HONEYCOMB_API_KEY=<your api key here>
