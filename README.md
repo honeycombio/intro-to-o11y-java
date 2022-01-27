@@ -54,15 +54,17 @@ Now open `.env`, and populate the environment variables. (This file will be igno
 
 ```
 export HONEYCOMB_API_KEY=replace-this-with-a-real-api-key # important and unique to you
-export HONEYCOMB_DATASET=hello-observability # can be any name
-export SERVICE_NAME=fib-microsvc # can be any name
+export HONEYCOMB_TRACES_DATASET=hello-observability # can be any name
+export OTEL_SERVICE_NAME=fib-microsvc # can be any name
 ```
 
 Alternative: set the variables at the command line before running the app.
+(These will be overridden by .env if it exists.)
 
 ```
 export HONEYCOMB_API_KEY=<your api key here>
-export HONEYCOMB_DATASET=hello-observability # or whatever you want to name it
+export HONEYCOMB_TRACES_DATASET=hello-observability # or whatever you want to name it
+export OTEL_SERVICE_NAME=fib-microsvc # or whatever you like
 
 ./run
 ```
