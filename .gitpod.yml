@@ -1,6 +1,6 @@
 # Commands to start on workspace startup
 tasks:
-  - init: 
+  - init: mvn install
     command: ./run
 vscode:
   extensions:
