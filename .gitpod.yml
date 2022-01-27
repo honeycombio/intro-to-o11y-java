@@ -2,3 +2,8 @@
 tasks:
   - init: 
     command: ./run
+vscode:
+  extensions:
+    - redhat.java
+    - vscjava.vscode-java-debug
+    - vscjava.vscode-maven
