@@ -54,7 +54,7 @@
                     </environmentVariables>
                     <agents>
                         <agent>
-                            honeycomb-opentelemetry-javaagent-0.8.1.jar
+                            honeycomb-opentelemetry-javaagent-0.10.0.jar
                         </agent>
                     </agents>
                 </configuration>
