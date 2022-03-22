@@ -79,7 +79,7 @@ Alternative 3: In GitPod, you can set [variables](https://gitpod.io/variables) t
 
 Run the app:
 
-`mvn spring-boot:run`
+`./run`
 
 Once the Spring banner passes and the logs hold still, hit it at [http://localhost:8080](http://localhost:8080).
 
