@@ -146,9 +146,9 @@ Find details (and the latest) in [Honeycomb's docs](https://docs.honeycomb.io/ge
 
 This is a jar that runs alongside your program, and injects bytecode for tracing.
 
-Download the Honeycomb OpenTelemetry Java agent into your project directory from [this direct download link](https://github.com/honeycombio/honeycomb-opentelemetry-java/releases/download/v0.8.1/honeycomb-opentelemetry-javaagent-0.8.1.jar) or from the [releases page](https://github.com/honeycombio/honeycomb-opentelemetry-java/releases).
+Download the Honeycomb OpenTelemetry Java agent into your project directory from [this direct download link](https://github.com/honeycombio/honeycomb-opentelemetry-java/releases/download/v1.0.0/honeycomb-opentelemetry-javaagent-1.0.0.jar) or from the [releases page](https://github.com/honeycombio/honeycomb-opentelemetry-java/releases).
 
-or from a linux command line (including the devcontainer): `wget https://github.com/honeycombio/honeycomb-opentelemetry-java/releases/download/v0.8.1/honeycomb-opentelemetry-javaagent-0.8.1.jar`
+or from a linux command line (including the devcontainer): `wget https://github.com/honeycombio/honeycomb-opentelemetry-java/releases/download/v1.0.0/honeycomb-opentelemetry-javaagent-1.0.0.jar`
 
 ### Attach the Agent
 
@@ -163,7 +163,7 @@ To add this to `mvn spring-boot:run`, open `pom.xml`, find the `plugin` block fo
     <configuration>
         <agents>
             <agent>
-                honeycomb-opentelemetry-javaagent-0.8.1.jar
+                honeycomb-opentelemetry-javaagent-1.0.0.jar
             </agent>
         </agents>
     </configuration>
@@ -197,7 +197,7 @@ Compare to the jar in the root of this repo.
 If out of date:
 
 - update the version in this file (many times, including the next line)
-- download the new one: `wget https://github.com/honeycombio/honeycomb-opentelemetry-java/releases/download/v0.8.1/honeycomb-opentelemetry-javaagent-0.8.1.jar`
+- download the new one: `wget https://github.com/honeycombio/honeycomb-opentelemetry-java/releases/download/v1.0.0/honeycomb-opentelemetry-javaagent-1.0.0.jar`
 - delete the old one
 - update the version in the `agent` section of `pom.xml`
 
