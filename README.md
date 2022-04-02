@@ -54,8 +54,7 @@ Now open `.env`, and populate the environment variables. (This file will be igno
 
 ```
 export HONEYCOMB_API_KEY=replace-this-with-a-real-api-key # important and unique to you
-export HONEYCOMB_TRACES_DATASET=hello-observability # can be any name
-export OTEL_SERVICE_NAME=fib-microsvc # can be any name
+export OTEL_SERVICE_NAME=sequence-of-numbers # can be any name
 ```
 
 Alternative: set the variables at the command line before running the app.
@@ -63,8 +62,7 @@ Alternative: set the variables at the command line before running the app.
 
 ```
 export HONEYCOMB_API_KEY=<your api key here>
-export HONEYCOMB_TRACES_DATASET=hello-observability # or whatever you want to name it
-export OTEL_SERVICE_NAME=fib-microsvc # or whatever you like
+export OTEL_SERVICE_NAME=sequence-of-numbers # or whatever you like
 
 ./run
 ```
@@ -87,7 +85,7 @@ Activate the sequence of numbers by pushing **Go**. After you see numbers, push 
 
 ### See the Results
 
-Go to [Honeycomb](https://ui.honeycomb.io) and choose the Dataset you configured.
+Go to [Honeycomb](https://ui.honeycomb.io). To choose a dataset, use the OTEL_SERVICE_NAME you configured. (The default is 'sequence of numbers').
 
 Do you see data in the graphs? Success!
 

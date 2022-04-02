@@ -48,9 +48,8 @@
                 <configuration>
                     <environmentVariables>
                         <SAMPLE_RATE>1</SAMPLE_RATE>
-                        <OTEL_SERVICE_NAME>fib-microsvc</OTEL_SERVICE_NAME>
+                        <OTEL_SERVICE_NAME>sequence-of-numbers</OTEL_SERVICE_NAME>
                         <!--                        <HONEYCOMB_API_KEY>define this in your runtime env vars</HONEYCOMB_API_KEY>-->
-                        <HONEYCOMB_TRACES_DATASET>hello-observability</HONEYCOMB_TRACES_DATASET>
                     </environmentVariables>
                     <agents>
                         <agent>
