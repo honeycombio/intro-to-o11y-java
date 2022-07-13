@@ -41,8 +41,7 @@ If the app is running, stop it. Until...
 
 You need two environment variables.
 
-Get a Honeycomb API Key from your Team Settings in [Honeycomb](https://ui.honeycomb.io).
-(Find this by clicking on your profile in the lower-left corner.)
+[Log in to honeycomb](ui.honeycomb.io) and [get a Honeycomb API Key](https://docs.honeycomb.io/getting-data-in/api-keys/#find-api-keys).
 
 **Recommended**: Let's put them in a file (and then not commit it).
 
@@ -85,7 +84,7 @@ Activate the sequence of numbers by pushing **Go**. After you see numbers, push 
 
 ### See the Results
 
-Go to [Honeycomb](https://ui.honeycomb.io). To choose a dataset, use the OTEL_SERVICE_NAME you configured. (The default is 'sequence of numbers').
+Go to [Honeycomb](https://ui.honeycomb.io). To choose a dataset, use the OTEL_SERVICE_NAME you configured. (The default is 'sequence-of-numbers').
 
 Do you see data in the graphs? Success!
 
