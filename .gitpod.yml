@@ -1,7 +1,7 @@
 # Commands to start on workspace startup
 tasks:
   - init: mvn install
-    command: ./run
+    command: cp .env.example .env
 vscode:
   extensions:
     - redhat.java
