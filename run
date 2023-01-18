@@ -1,9 +1,12 @@
 #!/bin/bash
 
-if [ -f ".env" ]
+
+if [ ! -f ".env" ]
 then
-  echo "Reading .env"
-  source .env
+  echo "Creating .env -- update it with your API key!"
+  cp .env.example .env
 fi
+
+source .env
 
 mvn spring-boot:run
