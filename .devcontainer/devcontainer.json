@@ -17,6 +17,13 @@
 		}
 	},
 
+	"forwardPorts": [8080],
+	"portsAttributes": {
+		"8080": {
+			"visibility": "public"
+		}
+	},
+
 	// Set *default* container specific settings.json values on container create.
 	"settings": { 
 		"java.home": "/docker-java-home"
