@@ -1,4 +1,8 @@
-# Intro to Observability: OpenTelemetry in Java
+# Intro to Observability: OpenTelemetry in Java - DEPRECATED
+
+DEPRECATED - Please prefer the Meminator application as an example: [https://github.com/honeycombio/meminator-workshop/]()
+
+## Former Description
 
 This Spring Boot application is here for you to try out tracing with Honeycomb.
 It consists of a microservice that calls itself, so you can simulate a whole microservice ecosystem with just one service!
